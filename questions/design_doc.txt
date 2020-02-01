@@ -1,0 +1,172 @@
+Text File questions
+
+
+
+
+
+
+Problem 01: Sample Paragraphs
+
+
+
+- Which functions from utils.py will you use for interacting with the sample_paragraphs.txt file?
+
+Answer: I will initially use the open() function to open the file that we will read from (this was included in the index of the project website). Moreover, after opening the file, I will use the readlines() function to read all of the lines within the opened file. After having done this, I will use the strip() function to strip the lines within the value returned using the readlines() function. This will be sufficient enough to solve the question.
+
+
+
+
+
+
+
+
+Problem 02: Words Per Minute
+
+
+
+- Given a long string that contains a full paragraph (e.g. "This is my name. It is Bob. Also, I have a cat named Troy."), what function will you use to separate a string containing a full paragraph into its individual words?
+
+
+
+
+
+- What is the calculation you will use in order to measure Words Per Minute speed? (You can describe your formula.)
+
+
+
+
+
+- What is the calculation you will use in order to measure accuracy? (You can describe your formula.)
+
+Answer: Initially, I will use the split() function from utils.py to seperate each word into a list and then use list indexing to check each word from the given paragraph. To find the Words Per Minute Speed, I will initially find the length of the string (of all the characters), then divide it by 2. After that, I will find the change in time, which will be end_time - start_time, which I will then use to find the wpm speed. The formula for that will be: wpm = (length/2)*(60/end_time-start_time). To find the accuracy, I will first count how many words are the same from the sample string and the entered string using the list indexing described previously, then I will use the count to find the value. The formula for that will be: (count/len(entered_string))*100.
+	
+
+
+
+
+
+
+Problem 03: Pig Latin
+
+
+
+- How will you identify that a word starts with a consonant cluster? 
+
+
+
+
+
+
+
+Answer: I will initially use the lower() and split() function to split the word (with lower cases) and then I will use list indexing to keep track of which letter my code is currently on. I will use the 'for word in word_list' statement to keep track of the letter. Then I will use the statement 'if letter in 'aeiou'' to find out at which point my word has a vowel. Then I will use every number of the index until the current index to retrieve the letters of a consonant cluster, and that's how I can identify and retrieve the letters from a consonant cluster with ease.
+
+Problem 04: Autocorrect Skeleton
+
+
+
+- How will you calculate the difference scores between the user input string and each valid word, and determine which difference is the smallest?
+
+Answer: I will use the 'for word in word_list' statement to run the score_function to every word in that list along with the user_input. The results of each difference scores will be placed within a list (empty at first) that has been assigned at the start of the function, then I will retrieve the index value of the smallest number in that list using the min(list) function to find the smallest number and the list.index(), something like list.index(min(list)), which will then be used to find the word from the words_list. So if the index value of 2 gives the smallest number in my defined list, then I will return words_list[2] to get that word back as the answer. 
+
+
+
+
+
+
+
+
+Problem 05: Score Function 
+
+
+
+- What will your base case be?
+
+
+
+
+
+- Identify two example inputs which fall into different recursive calls. In each of these cases, what recursive call should be made?
+
+Answer: My base case will be if the first string or the second string is equal to "", then it would return 0. Then it would follow up with the two recursive calls to see if the letter is the same or not. For instance, if the input of "goodbye" is being compared with "good", my input will into the recursive call of 'if s1[0] == s2[0]', then just return swap_score(s1[1:],s2[1:]) since the letters match and there is no need to add 1 (since 'good' from 'goodbye' is the same as the reference word 'good'), then if s1 has 'bye' left and s2 has '', then 0 is added to it. On the other hand, if the input of 'ash' is compared to 'hash', this will fall into the recursive call of 'else' or 'elif s1[0]!=s2[0] (which is the same thing), it will return 1 + swap_score(s1[1:],s2[1:]), since the letters from the left are wrong. At the end of this call, it will see that s1 is left with '' and s2 is left with 'h', so 0 is added to it.
+
+
+
+
+
+
+
+
+Problem 06: 
+
+
+
+- What does each of the recursive calls in the skeleton represent? Are there additional cases which don't fit into the three already given?
+
+
+
+
+
+- If we called score_function("bot", "boot"), list a series of successive recursive calls we would go through to reach the base case. For example, if we called score_function("add", "aadd"), one step could be score_function("add", "aadd") -> score_function("add", "add").
+
+
+
+
+
+- Based on your above list of recursive calls, classify each step as an add, remove, a swap, or something else.
+
+
+
+
+
+- Why would your function choose this sequence of recursive calls over another?
+
+Answer: From the initial looks of the given skeleton, I do not believe that there are additional cases. Moreover, each of the recursive calls within my function will represent one of the given three operations from the given word and then comparing this new and modified word with the word that I will need to match.
+
+For the given example of ("bot","boot"), the successive recursive calls would be:
+score_function("bot","boot") -> score_function("bot","bot")
+
+Only one step was needed to perform this function and this performed operation was removing/deleting a letter. I chose this sequence of recursive calls over another because this is the shortest way to match the words.
+
+
+
+
+Problem 07: Accuracy
+
+
+
+- In your own words, why do we need to improve the accuracy of our existing score_function? In other words, what is the problem that we are trying to solve?
+
+
+
+
+
+- How can you adapt your score function from the previous problem to take into account key distances?
+ (Hint: which recursive call will need to be modified?)
+
+Answer: We need to improve the accuracy of our existing score_function because even though there are a lot of words that are misspelled and can be matched to, some words are certainly more likely to be more correct than a few others because the letters that were misspelled could be closer to the correct letter (in accordance to the default QWERTY keyboard) rather than the other words. Moreover, the substitute recursive call will be the one to be modified so that I can add the distance between the substituting key and the key to be substituted (rather than just 1.)
+
+
+
+
+
+
+
+Problem 08: Efficiency
+
+
+
+- What data structure will you use to store all of the differences that score_function has already calculated?
+
+
+
+
+
+- What types of values will this data structure contain?
+
+
+
+
+
+- Using the data structure you described, given a pair of words, how will you check whether score_function has already been called on that pair of words? If so, how will you access the already calculated difference?
+
+Answer: I will use a dictionary to store all of the differences that score_function has calculated. Moreover, the keys of my dictionary will be 2 item lists of strings along with the values of the dictionary being floats. Firstly, I will place the pair of words into a list and then compare it if the list is a key within my assigned dictionary. If it is, then I will access the value corresponding that key within my dictionary and that would already be the calculated difference.
